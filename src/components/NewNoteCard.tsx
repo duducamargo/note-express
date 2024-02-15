@@ -7,12 +7,12 @@ interface NewNoteCardProps {
   onNoteCreated: (content: string) => void;
 }
 
+let speechRecognition: SpeechRecognition | null = null;
+
 export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
-
-  let speechRecognition: SpeechRecognition | null = null;
 
   function handleStartEditor() {
     setShouldShowOnBoarding(false);
@@ -54,6 +54,7 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
       window.SpeechRecognition || window.webkitSpeechRecognition;
 
     speechRecognition = new SpeechRecognitionAPI();
+
     speechRecognition.lang = "en";
     speechRecognition.continuous = true;
     speechRecognition.maxAlternatives = 1;
@@ -134,8 +135,8 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
 
             {isRecording ? (
               <button
-                onClick={handleStopRecording}
                 type="button"
+                onClick={handleStopRecording}
                 className="w-full flex items-center justify-center gap-2 bg-slate-900 py-4 text-center text-sm text-slate-300 outline-none font-medium hover:text-slate-100"
               >
                 <div className="size-3 rounded-full bg-red-500 animate-pulse" />
