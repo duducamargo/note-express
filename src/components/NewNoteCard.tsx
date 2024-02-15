@@ -12,6 +12,8 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
 
+  let speechRecognition: SpeechRecognition | null = null;
+
   function handleStartEditor() {
     setShouldShowOnBoarding(false);
   }
@@ -34,26 +36,58 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     setContent("");
     setShouldShowOnBoarding(true);
 
-    toast.success("Nota criada com sucesso");
+    toast.success("Note created with success");
   }
 
   function handleStartRecording() {
+    const isSpeechRecognitionAPIAvailable =
+      "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
+
+    if (!isSpeechRecognitionAPIAvailable) {
+      alert("Unfortunately your navigator do not suport the recording API");
+      return;
+    }
     setIsRecording(true);
+    setShouldShowOnBoarding(false);
+
+    const SpeechRecognitionAPI =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    speechRecognition = new SpeechRecognitionAPI();
+    speechRecognition.lang = "en";
+    speechRecognition.continuous = true;
+    speechRecognition.maxAlternatives = 1;
+    speechRecognition.interimResults = true;
+
+    speechRecognition.onresult = (e) => {
+      const transcription = Array.from(e.results).reduce((text, result) => {
+        return text.concat(result[0].transcript);
+      }, "");
+
+      setContent(transcription);
+    };
+
+    speechRecognition.onerror = (e) => {
+      console.log(e);
+    };
+
+    speechRecognition.start();
   }
 
   function handleStopRecording() {
     setIsRecording(false);
+
+    if (speechRecognition !== null) {
+      speechRecognition.stop();
+    }
   }
 
   return (
     <Dialog.Root>
       <Dialog.Trigger className="rounded-md flex flex-col text-left bg-slate-700 gap-3 outline-none p-5 hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible: ring-lime-400">
-        <span className="text-small font-medium text-slate-200 ">
-          Adicionar nota
-        </span>
+        <span className="text-small font-medium text-slate-200 ">New note</span>
         <p className="text-small leading-6 text-slate-400">
-          Grave uma nota em áudio que será convertida para texto
-          automaticamente.
+          Record an audio note that will be converted to text automatically.
         </p>
       </Dialog.Trigger>
 
@@ -66,25 +100,25 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
           <form className="flex-1 flex flex-col">
             <div className="flex flex-1 flex-col gap-3 p-5">
               <span className="text-small font-medium text-slate-300 ">
-                Adicionar Nota
+                New note
               </span>
               {shouldShowOnBoarding ? (
                 <p className="text-small leading-6 text-slate-400">
-                  Comece{" "}
+                  Start by{" "}
                   <button
                     type="button"
                     onClick={handleStartRecording}
                     className="font-md text-lime-400 hover:underline"
                   >
-                    gravando uma nota
+                    recording an audio note
                   </button>{" "}
-                  em audio ou se preferir{" "}
+                  or if you prefer{" "}
                   <button
                     type="button"
                     onClick={handleStartEditor}
                     className="font-md text-lime-400 hover:underline"
                   >
-                    utilize apenas texto
+                    just use text
                   </button>
                   .
                 </p>
@@ -105,7 +139,7 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                 className="w-full flex items-center justify-center gap-2 bg-slate-900 py-4 text-center text-sm text-slate-300 outline-none font-medium hover:text-slate-100"
               >
                 <div className="size-3 rounded-full bg-red-500 animate-pulse" />
-                Gravando! (Clique p/ interromper)
+                Recording! (Click to interrupt)
               </button>
             ) : (
               <button
@@ -113,7 +147,7 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                 onClick={handleSaveNote}
                 className="w-full bg-lime-400 py-4 text-center text-sm text-lime-950 outline-none font-medium hover:bg-lime-500"
               >
-                Salvar Nota
+                Save Note
               </button>
             )}
           </form>
