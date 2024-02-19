@@ -7,7 +7,7 @@ export default {
         sans: ["Inter", "sans-serif"],
       },
       backgroundImage: {
-        sky: "url('../public/dark_blue_sky_with_clouds_draw.jpg')",
+        sky: "url('../public/484.aviv')",
       },
     },
   },
