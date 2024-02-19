@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
       },
+      backgroundImage: {
+        sky: "url('../public/dark_blue_sky_with_clouds_draw.jpg')",
+      },
     },
   },
   plugins: [],
