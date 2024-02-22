@@ -4,7 +4,7 @@ import paperplane from "../../public/paperplane.png";
 function HomePage() {
   return (
     <div className="flex justify-center  text-slate-200 cursor-default ">
-      <div className=" flex flex-col mx-auto bg-sky bg-no-repeat bg-center bg-cover mt-8 p-1 border-[1px] border-white/20 rounded-[10px] md:px-32">
+      <div className=" flex flex-col mx-auto bg-sky bg-no-repeat bg-center bg-cover mt-8 p-1 border-[1px] border-white/20 rounded-[10px] md:px-4">
         <img
           src={paperplane}
           className="absolute w-40 mt-80 ml-[400px] md:ml-[550px] md:mt-72"
