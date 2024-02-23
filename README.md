@@ -29,13 +29,25 @@ Note Express is a simple note-taking application built with React, TailwindCss a
    npm install
    ```
 
-4. Start the server:
+4. Init Client Dist:
+
+   ```bash
+   npm run build:client
+   ```
+
+5. Init Server Dist:
+
+   ```bash
+   npm run build:server
+   ```
+
+6. Start the server:
 
    ```bash
    npm start
    ```
 
-5. Visit `http://localhost:3001` in your browser to use the application.
+7. Visit `http://localhost:3001` in your browser to use the application.
 
 ## Technologies Used
 
