@@ -1,6 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { enUS } from "date-fns/locale/en-US";
 import { X } from "lucide-react";
 
@@ -9,6 +8,7 @@ interface NoteCardProps {
     id: string;
     date: Date;
     content: string;
+    title: string;
   };
 
   onNoteDeleted: (id: string) => void;
@@ -24,6 +24,9 @@ export default function NoteCard({ note, onNoteDeleted }: NoteCardProps) {
             addSuffix: true,
           })}
         </span>
+        <h2 className=" font-medium text-xl mb-[-5px] text-slate-200/80">
+          {note.title}
+        </h2>
         <p className="text-small leading-6 text-slate-400">{note.content}</p>
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-black/0 pointer-events-none" />
       </Dialog.Trigger>

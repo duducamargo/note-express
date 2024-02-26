@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
 interface NewNoteCardProps {
-  onNoteCreated: (content: string) => void;
+  onNoteCreated: (content: string, title: string) => void;
 }
 
 let speechRecognition: SpeechRecognition | null = null;
@@ -13,6 +13,7 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
   const [shouldShowOnBoarding, setShouldShowOnBoarding] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("Title...");
 
   function handleStartEditor() {
     setShouldShowOnBoarding(false);
@@ -25,14 +26,20 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     }
   }
 
+  function handleTitle(event: ChangeEvent<HTMLTextAreaElement>) {
+    setTitle(event.target.value);
+  }
+
   function handleSaveNote(e: FormEvent) {
     e.preventDefault();
+
+    setTitle("Title...");
 
     if (content === "") {
       return;
     }
 
-    onNoteCreated(content);
+    onNoteCreated(content, title);
     setContent("");
     setShouldShowOnBoarding(true);
 
@@ -124,12 +131,23 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                   .
                 </p>
               ) : (
-                <textarea
-                  value={content}
-                  onChange={handleContentChanged}
-                  autoFocus
-                  className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none"
-                />
+                <div className="w-full h-full">
+                  <textarea
+                    placeholder="Title..."
+                    value={title}
+                    onChange={handleTitle}
+                    autoFocus
+                    className="text-2xl font-medium text-slate-200/80 mb-[-22px]
+                    bg-transparent block resize-none flex-1 outline-none"
+                  />
+
+                  <textarea
+                    value={content}
+                    onChange={handleContentChanged}
+                    autoFocus
+                    className="text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none h-5/6 w-full overflow-hidden "
+                  />
+                </div>
               )}
             </div>
 

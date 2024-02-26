@@ -6,6 +6,7 @@ interface Note {
   id: string;
   date: Date;
   content: string;
+  title: string;
 }
 
 export default function App() {
@@ -20,11 +21,12 @@ export default function App() {
     return [];
   });
 
-  function onNoteCreated(content: string) {
+  function onNoteCreated(content: string, title: string) {
     const newNote = {
       id: crypto.randomUUID(),
       date: new Date(),
       content: content,
+      title: title,
     };
 
     const notesArray = [newNote, ...notes];
@@ -52,8 +54,12 @@ export default function App() {
 
   const filteresNotes =
     search !== ""
-      ? notes.filter((note) =>
-          note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      ? notes.filter(
+          (note) =>
+            note.content
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase()) ||
+            note.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
       : notes;
 
