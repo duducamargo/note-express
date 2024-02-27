@@ -3,7 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      mmd: "610px",
+      sm: "640px", // Exemplo de breakpoint personalizado para "small"
+      md: "768px",
+      lg: "1024px",
     },
     extend: {
       fontFamily: {
