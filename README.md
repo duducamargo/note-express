@@ -1,6 +1,12 @@
+🚧⚠This project is in development.⚠🚧
+
 # Note Express
 
-Note Express is a simple note-taking application built with React, TailwindCss and  Express.js. It allows users to easily create, read, and delete notes.
+✈️✉️Note Express is a simple note-taking application built with React, TailwindCss and  Express.js. It allows users to easily create, read, and delete notes.
+
+🚀The application is currently deployed at [Note Express](https://note-express-production.up.railway.app/).
+
+**"This service is still in progress, aiming to optimize the application for mobile devices."**
 
 ## Features
 
