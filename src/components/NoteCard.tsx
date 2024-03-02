@@ -85,7 +85,7 @@ export default function NoteCard({
                 autoFocus
                 maxLength={30}
                 className="h-12 text-2xl font-medium text-slate-200/80 
-              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-280px] md:mb-[-132px]"
+              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-260px] md:mb-[-112px]"
               />
 
               <textarea
@@ -126,7 +126,7 @@ export default function NoteCard({
                 autoFocus
                 disabled
                 className="h-12 text-2xl font-medium text-slate-200/80 
-              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-280px] md:mb-[-132px]"
+              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-260px] md:mb-[-112px]"
               />
 
               <textarea
