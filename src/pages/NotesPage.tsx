@@ -36,6 +36,27 @@ export default function App() {
     localStorage.setItem("notes", JSON.stringify(notesArray));
   }
 
+  function onNoteEdited(
+    id: string,
+    editedTitle: string,
+    editedContent: string
+  ) {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === id) {
+        return {
+          ...note,
+          title: editedTitle,
+          content: editedContent,
+        };
+      }
+      return note;
+    });
+
+    setNotes(updatedNotes);
+
+    localStorage.setItem("notes", JSON.stringify(updatedNotes));
+  }
+
   function onNoteDeleted(id: string) {
     const notesArray = notes.filter((note) => {
       return note.id !== id;
@@ -79,7 +100,12 @@ export default function App() {
         <NewNoteCard onNoteCreated={onNoteCreated} />
         {filteresNotes.map((note) => {
           return (
-            <NoteCard note={note} key={note.id} onNoteDeleted={onNoteDeleted} />
+            <NoteCard
+              note={note}
+              key={note.id}
+              onNoteEdited={onNoteEdited}
+              onNoteDeleted={onNoteDeleted}
+            />
           );
         })}
       </div>

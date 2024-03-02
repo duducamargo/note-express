@@ -7,10 +7,10 @@ function HomePage() {
       <div className=" flex flex-col mx-auto bg-sky bg-no-repeat bg-center bg-cover mt-8 p-1 border-[1px] border-white/20 rounded-[10px] md:px-4">
         <img
           src={paperplane}
-          className="absolute w-40 mt-80 ml-[400px] md:ml-[550px] md:mt-72"
+          className="absolute w-40 mt-80 ml-[400px] md:ml-[550px] md:mt-72 sm:w-0"
         ></img>
         <h1 className="text-6xl mb-9 mt-16 mx-auto">The Best Notes Site.</h1>
-        <p className=" text-slate-100/70 text-xl mb-9 justify-center w-[600px] md:w-[800px] text-center">
+        <p className=" text-slate-100/70 text-xl mb-9 justify-center w-[600px] md:w-[800px] text-center ">
           Unlock the power of organization and productivity with our
           cutting-edge note-taking platform. Designed with simplicity and
           efficiency in mind, our site offers the most seamless experience for
