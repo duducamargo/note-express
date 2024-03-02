@@ -83,15 +83,16 @@ export default function NoteCard({
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
                 autoFocus
-                className="text-2xl pl-5 font-medium text-slate-200/80 mb-[-125px]
-              bg-transparent block resize-none flex-1 outline-none"
+                maxLength={30}
+                className="h-12 text-2xl font-medium text-slate-200/80 
+              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-280px] md:mb-[-132px]"
               />
 
               <textarea
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
                 autoFocus
-                className="leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none h-5/6 w-full overflow-hidden pl-5"
+                className="leading-6 pl-5 text-slate-400 bg-transparent resize-none flex-1 outline-none h-5/6 w-full overflow-hidden"
               />
               <div className="flex flex-1 flex-col gap-3">
                 <div className="flex fixed bottom-0 w-full">
@@ -119,29 +120,41 @@ export default function NoteCard({
                   addSuffix: true,
                 })}
               </span>
-              <h1 className="text-2xl font-medium text-slate-200/80 pl-5">
-                {note.title}
-              </h1>
-              <p className="text-small leading-6 text-slate-400 pl-5">
-                {note.content}
-              </p>
-              <div className="flex fixed bottom-0 w-full">
-                <button
-                  type="button"
-                  onClick={() => onNoteDeleted(note.id)}
-                  className="w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none font-medium group"
-                >
-                  Do you want to{" "}
-                  <span className="text-red-400 group-hover:underline">
-                    delete this note?
-                  </span>
-                </button>
-                <button
-                  onClick={handleEdit}
-                  className="w-24 text-2xl flex justify-center items-center bg-slate-800/80 hover:bg-slate-800/50   hover:text-lime-400 "
-                >
-                  <BiEditAlt />
-                </button>
+              <textarea
+                value={editedTitle}
+                onChange={(e) => setEditedTitle(e.target.value)}
+                autoFocus
+                disabled
+                className="h-12 text-2xl font-medium text-slate-200/80 
+              bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-280px] md:mb-[-132px]"
+              />
+
+              <textarea
+                value={editedContent}
+                onChange={(e) => setEditedContent(e.target.value)}
+                autoFocus
+                disabled
+                className="leading-6 pl-5 text-slate-400 bg-transparent resize-none flex-1 outline-none h-5/6 w-full overflow-hidden"
+              />
+              <div className="flex flex-1 flex-col gap-3">
+                <div className="flex fixed bottom-0 w-full">
+                  <button
+                    type="button"
+                    onClick={() => onNoteDeleted(note.id)}
+                    className="w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none font-medium group"
+                  >
+                    Do you want to{" "}
+                    <span className="text-red-400 group-hover:underline">
+                      delete this note?
+                    </span>
+                  </button>
+                  <button
+                    onClick={handleEdit}
+                    className="w-24 text-2xl flex justify-center items-center bg-slate-800/80 hover:bg-slate-800/50   hover:text-lime-400 "
+                  >
+                    <BiEditAlt />
+                  </button>
+                </div>
               </div>
             </div>
           )}

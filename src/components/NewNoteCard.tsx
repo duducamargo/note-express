@@ -137,7 +137,8 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                     value={title}
                     onChange={handleTitle}
                     autoFocus
-                    className="text-2xl font-medium text-slate-200/80 mb-[-22px]
+                    maxLength={30}
+                    className="text-2xl w-full font-medium text-slate-200/80 mb-[-22px]
                     bg-transparent block resize-none flex-1 outline-none"
                   />
 
