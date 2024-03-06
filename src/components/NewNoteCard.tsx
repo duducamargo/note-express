@@ -26,6 +26,20 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     }
   }
 
+  const handleTitleKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const contentTextarea = document.getElementById(
+        "contentTextarea"
+      ) as HTMLTextAreaElement | null;
+      if (contentTextarea) {
+        contentTextarea.focus();
+      }
+    }
+  };
+
   function handleTitle(event: ChangeEvent<HTMLTextAreaElement>) {
     setTitle(event.target.value);
   }
@@ -137,12 +151,14 @@ export default function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
                     value={title}
                     onChange={handleTitle}
                     autoFocus
+                    onKeyDown={handleTitleKeyDown}
                     maxLength={30}
                     className="text-2xl w-full font-medium text-slate-200/80 mb-[-22px]
                     bg-transparent block resize-none flex-1 outline-none"
                   />
 
                   <textarea
+                    id="contentTextarea"
                     value={content}
                     onChange={handleContentChanged}
                     autoFocus

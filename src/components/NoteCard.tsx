@@ -48,6 +48,20 @@ export default function NoteCard({
     toast.success("Note edited with succes");
   }
 
+  const handleTitleKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const contentTextarea = document.getElementById(
+        "editedContent"
+      ) as HTMLTextAreaElement | null;
+      if (contentTextarea) {
+        contentTextarea.focus();
+      }
+    }
+  };
+
   return (
     <Dialog.Root>
       <Dialog.Trigger className="rounded-md text-left flex flex-col bg-slate-800 gap-3 p-5 overflow-hidden relative outline-none hover:ring-2 hover:ring-slate-600 focus-visible:ring-2 focus-visible: ring-lime-400 ">
@@ -83,12 +97,14 @@ export default function NoteCard({
                 value={editedTitle}
                 onChange={(e) => setEditedTitle(e.target.value)}
                 autoFocus
+                onKeyDown={handleTitleKeyDown}
                 maxLength={30}
                 className="h-12 text-2xl font-medium text-slate-200/80 
               bg-transparent block resize-none flex-1 outline-none pl-5 mb-[-260px] md:mb-[-112px]"
               />
 
               <textarea
+                id="editedContent"
                 value={editedContent}
                 onChange={(e) => setEditedContent(e.target.value)}
                 autoFocus
